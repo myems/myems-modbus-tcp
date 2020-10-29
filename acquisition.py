@@ -7,7 +7,7 @@ import telnetlib
 from modbus_tk import modbus_tcp
 import config
 from decimal import Decimal
-import byte_swap
+from byte_swap import byte_swap_32_bit, byte_swap_64_bit
 
 
 ########################################################################################################################
@@ -138,7 +138,8 @@ def process(logger, data_source_id, host, port):
                     or address['function_code'] not in (1, 2, 3, 4) \
                     or address['offset'] < 0 \
                     or address['number_of_registers'] < 0 \
-                        or len(address['format']) < 1:
+                    or len(address['format']) < 1 \
+                        or not isinstance(address['byte_swap'], bool):
 
                     logger.error('Data Source(ID=%s), Point(ID=%s) Invalid address data.',
                                  data_source_id, point['id'])
@@ -186,9 +187,9 @@ def process(logger, data_source_id, host, port):
 
                 if address['byte_swap']:
                     if address['number_of_registers'] == 2:
-                        value = byte_swap.byte_swap_32_bit(result[0])
+                        value = byte_swap_32_bit(result[0])
                     elif address['number_of_registers'] == 4:
-                        value = byte_swap.byte_swap_64_bit(result[0])
+                        value = byte_swap_64_bit(result[0])
                     else:
                         value = result[0]
                 else:
