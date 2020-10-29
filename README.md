@@ -74,14 +74,14 @@ Input Data source protocol:
 ```
 modbus-tcp
 ```
-Input data source connection (example):
+Data source connection example:
 ```
 {"host":"10.9.67.99","port":502}
 ```
 
-Input point address (example):
+Point address example:
 ```
-{"slave_id":1, "function_code":3, "offset":1, "number_of_registers":2, "format":">f", "swap_adjacent_bytes":false}
+{"slave_id":1, "function_code":3, "offset":0, "number_of_registers":2, "format":"<f", "byte_swap":true}
 ```
 
 ### Address 
