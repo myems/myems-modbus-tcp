@@ -7,6 +7,7 @@ import telnetlib
 from modbus_tk import modbus_tcp
 import config
 from decimal import Decimal
+import byte_swap
 
 
 ########################################################################################################################
@@ -132,6 +133,7 @@ def process(logger, data_source_id, host, port):
                     or 'offset' not in address.keys() \
                     or 'number_of_registers' not in address.keys() \
                     or 'format' not in address.keys() \
+                    or 'byte_swap' not in address.keys() \
                     or address['slave_id'] < 1 \
                     or address['function_code'] not in (1, 2, 3, 4) \
                     or address['offset'] < 0 \
@@ -157,7 +159,8 @@ def process(logger, data_source_id, host, port):
                                  " function_code:" + str(address['function_code']) +
                                  " starting_address:" + str(address['offset']) +
                                  " quantity_of_x:" + str(address['number_of_registers']) +
-                                 " data_format:" + str(address['format']))
+                                 " data_format:" + str(address['format']) +
+                                 " byte_swap:" + str(address['byte_swap']))
 
                     if 'timed out' in str(e):
                         is_modbus_tcp_timed_out = True
@@ -181,7 +184,15 @@ def process(logger, data_source_id, host, port):
                                  " for point_id: " + str(point['id']))
                     continue
 
-                value = result[0]
+                if address['byte_swap']:
+                    if address['number_of_registers'] == 2:
+                        value = byte_swap.byte_swap_32_bit(result[0])
+                    elif address['number_of_registers'] == 4:
+                        value = byte_swap.byte_swap_64_bit(result[0])
+                    else:
+                        value = result[0]
+                else:
+                    value = result[0]
 
                 if point['object_type'] == 'ANALOG_VALUE':
                     analog_value_list.append({'data_source_id': data_source_id,
