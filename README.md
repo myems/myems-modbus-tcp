@@ -81,12 +81,29 @@ Input data source connection (example):
 
 Input point address (example):
 ```
-{"format":">f","function_code":3,"number_of_registers":2,"offset":1,"slave_id":1}
+{"slave_id":1, "function_code":3, "offset":1, "number_of_registers":2, "format":">f", "swap_adjacent_bytes":false}
 ```
 
 ### Address 
+
+#### slave_id
+    The slave ID
+
+#### function_code
+    01 (0x01) Read Coils
+    02 (0x02) Read Discrete Inputs
+    03 (0x03) Read Holding Registers
+    04 (0x04) Read Input Registers
+    23 (0x17) Read/Write Multiple registers
+
+#### offset
+    The starting register address specified in the Request PDU
+
+#### number_of_registers
+    The number of registers specified in the Request PDU
+
 #### format
-Functions to convert between Python values and C structs.
+Use python3 library struct to format bytes.
 Python bytes objects are used to hold the data representing the C struct
 and also as format strings (explained below) to describe the layout of data in the C struct.
 
@@ -115,21 +132,12 @@ Special case (not in native mode unless 'long long' in platform C):
 
 Whitespace between formats is ignored.
 
-#### function_code
-    01 (0x01) Read Coils
-    02 (0x02) Read Discrete Inputs
-    03 (0x03) Read Holding Registers
-    04 (0x04) Read Input Registers
-    23 (0x17) Read/Write Multiple registers
-
-#### number_of_registers
-    The number of registers specified in the Request PDU
-
-#### offset
-    The starting register address specified in the Request PDU
-
-#### slave_id
-    The slave ID
+#### byte_swap
+    The boolean value indicates whether swaps adjacent bytes.  
+Swap adjacent bytes of 32bits(4byte) or 64bits(8bytes).
+This is not for little-endian and big-endian swapping, and use format for that.
+The option is effective when number_of_registers is ether 2(32bits) or 4(64bits), 
+else it will be ignored.
 
 
 ### References
@@ -139,3 +147,4 @@ Whitespace between formats is ignored.
   
   [3]. https://github.com/ljean/modbus-tk
 
+  [4]. https://docs.python.org/3/library/struct.html#format-strings
