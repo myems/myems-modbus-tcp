@@ -133,8 +133,8 @@ Special case (not in native mode unless 'long long' in platform C):
 Whitespace between formats is ignored.
 
 #### byte_swap
-    The boolean value indicates whether swaps adjacent bytes.  
-Swap adjacent bytes of 32bits(4byte) or 64bits(8bytes).
+A boolean indicates whether or not to swap adjacent bytes.  
+Swap adjacent bytes of 32bits(4bytes) or 64bits(8bytes).
 This is not for little-endian and big-endian swapping, and use format for that.
 The option is effective when number_of_registers is ether 2(32bits) or 4(64bits), 
 else it will be ignored.
