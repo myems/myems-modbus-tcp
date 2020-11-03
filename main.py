@@ -43,12 +43,13 @@ def main():
             time.sleep(60)
             continue
 
+        # Get data sources by gateway and protocol
         try:
             query = (" SELECT ds.id, ds.name, ds.connection "
                      " FROM tbl_data_sources ds, tbl_gateways g "
-                     " WHERE ds.protocol = 'modbus-tcp' AND g.id = %s AND g.token = %s "
+                     " WHERE ds.protocol = 'modbus-tcp' AND ds.gateway_id = g.id AND g.id = %s AND g.token = %s "
                      " ORDER BY ds.id ")
-            cursor_system_db.execute(query, (config.gateway['id'], config.gateway['token'], ))
+            cursor_system_db.execute(query, (config.gateway['id'], config.gateway['token'],))
             rows_data_source = cursor_system_db.fetchall()
         except Exception as e:
             logger.error("Error in main process " + str(e))
