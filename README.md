@@ -3,6 +3,7 @@
 ### Introduction
 This service is a component of MyEMS to acquire data from Modbus TCP devices.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6b4a22007133463d99493e1798266829)](https://app.codacy.com/gh/myems/myems-modbus-tcp?utm_source=github.com&utm_medium=referral&utm_content=myems/myems-modbus-tcp&utm_campaign=Badge_Grade_Settings)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/myems/myems-modbus-tcp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/myems/myems-modbus-tcp/?branch=master)
 
 ### Prerequisites
