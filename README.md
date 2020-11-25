@@ -3,7 +3,7 @@
 ### Introduction
 This service is a component of MyEMS to acquire data from Modbus TCP devices.
 
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/myems/myems-modbus-tcp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/myems/myems-modbus-tcp/?branch=master)
 
 ### Prerequisites
 pyserial
