@@ -12,8 +12,8 @@ myems_historical_db = {
     'database': 'myems_historical_db',
 }
 
-
-period_in_seconds = 60
+# Indicates how long the process waits between readings
+period_in_seconds = 180
 
 # Get the gateway ID and token from MyEMS Admin
 # This is used for getting data sources associated with the gateway
