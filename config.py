@@ -3,6 +3,7 @@ myems_system_db = {
     'password': '!MyEMS1',
     'host': '127.0.0.1',
     'database': 'myems_system_db',
+    'port': 3306,
 }
 
 myems_historical_db = {
@@ -10,10 +11,11 @@ myems_historical_db = {
     'password': '!MyEMS1',
     'host': '127.0.0.1',
     'database': 'myems_historical_db',
+    'port': 3306,
 }
 
 # Indicates how long the process waits between readings
-period_in_seconds = 180
+interval_in_seconds = 180
 
 # Get the gateway ID and token from MyEMS Admin
 # This is used for getting data sources associated with the gateway

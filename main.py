@@ -80,7 +80,7 @@ def main():
             continue
 
         try:
-            server = json.loads(row_data_source[2], encoding='utf-8')
+            server = json.loads(row_data_source[2])
         except Exception as e:
             logger.error("Data Source Connection JSON error " + str(e))
             continue

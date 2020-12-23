@@ -122,7 +122,7 @@ def process(logger, data_source_id, host, port):
             # foreach point loop
             for point in point_list:
                 try:
-                    address = json.loads(point['address'], encoding='utf-8')
+                    address = json.loads(point['address'])
                 except Exception as e:
                     logger.error("Error in step 3.2 of acquisition process: \n"
                                  "Invalid point address in JSON " + str(e))
@@ -414,7 +414,7 @@ def process(logger, data_source_id, host, port):
                         pass
 
             # sleep some seconds
-            time.sleep(config.period_in_seconds)
+            time.sleep(config.interval_in_seconds)
 
         # end of inner while loop
 
